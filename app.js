@@ -1,10 +1,21 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var path = require('path');
 
-app.get('/', function (request, response) {
-  response.send('Hello World\n');
+var PORT = 3000;
+
+/* =============== MIDDLEWARES =================== */
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var pageInfo = { "title": "TEDxPage" }
+
+app.get('/', function(req, resp) {
+  resp.json(pageInfo);
 });
 
-app.listen(3000, function() {
-	console.log('Listening on 3000 Port');
+app.listen(PORT, function() {
+	console.log('Listening on Port', PORT);
 });
